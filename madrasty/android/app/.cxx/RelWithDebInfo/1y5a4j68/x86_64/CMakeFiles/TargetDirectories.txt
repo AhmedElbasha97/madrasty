@@ -1,0 +1,2 @@
+C:/Users/elbasha/StudioProjects/madrasty/android/app/.cxx/RelWithDebInfo/1y5a4j68/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/elbasha/StudioProjects/madrasty/android/app/.cxx/RelWithDebInfo/1y5a4j68/x86_64/CMakeFiles/rebuild_cache.dir

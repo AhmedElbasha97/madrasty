@@ -1,0 +1,2 @@
+C:/Users/elbasha/StudioProjects/madrasty/android/app/.cxx/Debug/4c1b1940/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/elbasha/StudioProjects/madrasty/android/app/.cxx/Debug/4c1b1940/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,116 @@
+
+const greetingWord = "Greeting_Key";
+const requiredFiled = 'REQUIRED_FILED';
+const invalidEmail = 'INVALID_EMAIL';
+const invalidPassword = 'INVALID_PASSWORD';
+const invalidReTypePassword = "Invalid_ReType_Password";
+const noInternet = 'NO_INTERNET';
+const openInternet = 'OPEN_INTERNET';
+const tryAgain = 'TRY_AGAIN';
+const error = 'ERROR';
+const phoneNumberError = "Phone_Number_Error";
+const enterPasswordFirst = "Enter_Password_First";
+
+const skipToHomeBTN = "Skip_To_Home_BTN";
+const signUpTitle = "Sign_Up_Title";
+const signUpTitleName = "Sign_Up_Title_Name";
+const signUpTextName1 = "Sign_Up_Text_Name_1";
+const signUpTextName2 = "Sign_Up_Text_Name_2";
+const signUpTextName3 = "Sign_Up_Text_Name_3";
+const signUpTitlePhone = "Sign_Up_Title_Phone";
+const signUpTextPhone = "Sign_Up_Text_Phone";
+const signUpTextPhoneKey = "Sign_Up_Text_Phone_Key";
+const signUpTitleEmail = "Sign_Up_Title_Email";
+const signUpTextEmail = "Sign_Up_Text_Email";
+const signUpTitlePass = "Sign_Up_Title_Pass";
+const signUpTitleConfirmPass = "Sign_Up_Title_Confirm_Pass";
+const signUpBTN = "Sign_BTN";
+const signUpText1 = "Sign_Up_Text_1";
+const signUpText2 = "Sign_Up_Text_2";
+
+
+const errorKey = "Error_Key";
+
+const signInProfile = "Sign_In_Profile";
+const signUpProfile = "Sign_Up_Profile";
+
+const signInTitle = "Sign_In_Title";
+const signInText1 = "Sign_In_Text_1";
+const signInText2 = "Sign_In_Text_2";
+const signInTextEmail = "Sign_In_Title_Email";
+const signInTextPass = "Sign_In_Title_Pass";
+const signInTextForgetPass = "Sign_In_Title_Forget_Pass";
+const signInTextBTN = "Sign_In_Title_Forget_BTN";
+
+
+
+
+const readAppPolicyAndTerms = "Read_App_Policy_And_Terms";
+const privacyPolicy = "Privacy_Policy";
+const termsAndCondition = "Terms_And_Condition";
+const and = "And";
+const signInBTN = "Sign_In_BTN";
+const languageWelcomeBTN = "Language_Welcome_BTN";
+const drawerWidget1= "Drawer_Widget_1";
+const drawerWidget2= "Drawer_Widget_2";
+const drawerWidget3= "Drawer_Widget_3";
+const drawerWidget4= "Drawer_Widget_4";
+const drawerWidget5= "Drawer_Widget_5";
+const drawerWidget6= "Drawer_Widget_6";
+const drawerWidget7= "Drawer_Widget_7";
+const drawerWidget8= "Drawer_Widget_8";
+const drawerWidget9= "Drawer_Widget_9";
+const rememberMeKey= "Remember_Me_Key";
+const chooseUserKey= "Choose_User_Key";
+const userType1 = "User_Type_1";
+const userType2 = "User_Type_2";
+const userType3 = "User_Type_3";
+const userType4 = "User_Type_4";
+const userType5 = "User_Type_5";
+const textOfOTPTextField = "text_Of_OTP_TextField";
+const textOfOTPBTN = "text_Of_OTP_BTN";
+const textOfOTPBTNGoBack = "text_Of_OTP_BTN_Back";
+const otpAlert= "OTP_Alert";
+const signInAlert= "Sign_In_Alert";
+const signUpAlert1= "Sign_Up_Alert_1";
+const signUpAlert2= "Sign_Up_Alert_2";
+const detectPhoneNumberText= "Detect_Phone_Number_Text";
+const detectPhoneNumberBTN= "Detect_Phone_Number_BTN";
+const completeUserDataBTN= "Complete_User_Data_BTN";
+const completeUserDataText1= "Complete_User_Data_Text1";
+const completeUserDataText2= "Complete_User_Data_Text2";
+const parentTap1 = "Parent_Tap_1";
+const parentTap2 = "Parent_Tap_2";
+const parentTap3 = "Parent_Tap_3";
+const parentTap4 = "Parent_Tap_4";
+const parentTap5 = "Parent_Tap_5";
+const parentTap6 = "Parent_Tap_6";
+const parentTap7 = "Parent_Tap_7";
+const receivedKey = "Received_Key";
+const senderKey = "Sender_Key";
+const replyKey = "Reply_Key";
+const showDetailsKey = "Show_Details_Key";
+const showLocSchoolKey = "Show_Loc_School_Key";
+const schoolDetailsTap1 = "School_Details_Tap_1";
+const schoolDetailsTap2 = "School_Details_Tap_2";
+const schoolDetailsText1 = "School_Details_Text_1";
+const schoolDetailsText2 = "School_Details_Text_2";
+const schoolDetailsText3 = "School_Details_Text_3";
+const schoolDetailsText4 = "School_Details_Text_4";
+const schoolLocationKey = "School_Location_Key";
+const schoolSearchErrorKey = "School_Search_Error_Key";
+const sendingKidErrorKey = "Sending_Kid_Error_Key";
+const receivingKidErrorKey = "Receiving_Kid_Error_Key";
+const day1Key = "Day_1_Key";
+const day2Key = "Day_2_Key";
+const day3Key = "Day_3_Key";
+const day4Key = "Day_4_Key";
+const day5Key = "Day_5_Key";
+const typeOfRecommendations = "Type_Of_Recommendation";
+const typeOfRecommendation1 = "Type_Of_Recommendation_1";
+const typeOfRecommendation2 = "Type_Of_Recommendation_2";
+const choosePostType = "Choose_Post_Type";
+const postType1= "Post_Type_1";
+const postType2= "Post_Type_2";
+const postType3= "Post_Type_3";
+const postType4= "Post_Type_4";
