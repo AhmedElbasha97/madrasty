@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:madrasty/Utils/Colors_File.dart';
 
 class HomeController extends GetxController {
@@ -38,8 +39,30 @@ class HomeController extends GetxController {
     super.onInit();
     makingDotsForCarouselSlider(0);
     _getCurrentLocation();
+    checkForUpgrades();
   }
+  checkForUpgrades() async {
 
+    try {
+      final updateInfo = await InAppUpdate.checkForUpdate();
+
+      if (updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
+        // يوجد تحديث متاح، تقدر تختار:
+        // 1. Immediate (تحديث إجباري)
+        // 2. Flexible (تحديث اختياري)
+
+        // مثال على التحديث الفوري:
+        InAppUpdate.performImmediateUpdate();
+
+        // أو لو تفضل تحديث مرن:
+        // InAppUpdate.startFlexibleUpdate().then((_) {
+        //   InAppUpdate.completeFlexibleUpdate();
+        // });
+      }
+    } catch (e) {
+      print("Error checking for update: $e");
+    }
+  }
   choosingTap(int index) {
     chosenTap = index;
     update();

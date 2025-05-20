@@ -60,6 +60,8 @@ static String getMessageListEndPoint = "msg_view";//Post
 static String sendMessageEndPoint = "msg_send";//Post
 static String getClassTeacherListEndPoint = "school_ctgs";//Post
 static String checkPostAvailabilityEndPoint = "post_check";//Post
+static String resendNewOTPEndPoint = "send_otp";//Post
+
 
 
 }

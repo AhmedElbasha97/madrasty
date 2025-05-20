@@ -15,6 +15,7 @@ import '../../../Widgets/custom_text_widget.dart';
 import '../../../Widgets/loading_alert_dialogue.dart';
 import '../../../Widgets/text_field_widget.dart';
 import '../forget_password/the_phone_number_screen.dart';
+import '../sign_up/sign_up_screen.dart';
 import 'controller/sign_in_controller.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -595,6 +596,40 @@ class SignInScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                            ),
+                          ),
+                          const SizedBox(height: 10,),
+                          SizedBox(
+                            width: Get.width,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:   [
+                                CustomText(signInText1.tr,
+                                  textAlign: TextAlign.center,
+                                  style:  TextStyle(
+                                      fontFamily: Get.find<StorageService>().activeLocale == SupportedLocales.english?fontFamilyEnglishName:fontFamilyArabicName,
+                                      color: kDarkBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15),),
+                                const SizedBox(width: 5,),
+                                InkWell(
+                                  onTap: (){
+                                    Get.off(()=>const SignUpScreen(),transition: Get.find<StorageService>().activeLocale == SupportedLocales.english?Transition.rightToLeftWithFade:Transition.leftToRightWithFade);
+
+
+                                  },
+                                  child:  CustomText(signInText2.tr,
+                                    textAlign: TextAlign.center,
+                                    style:  TextStyle(
+                                        fontFamily: Get.find<StorageService>().activeLocale == SupportedLocales.english?fontFamilyEnglishName:fontFamilyArabicName,
+                                        color: kBlueColor,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 15),),
+                                ),
+
+
+
+                              ],
                             ),
                           ),
                           const SizedBox(

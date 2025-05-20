@@ -235,15 +235,24 @@ class SignUpController extends GetxController {
     List<Placemark> i =
     await placemarkFromCoordinates(lat, long);
     Placemark placeMark = i.first;
-
+    bool isFoundCountry = false;
     for(var countryCode in countriesCodesList!){
       if(placeMark.country == countryCode.name){
         selectedCountryCode = countryCode;
         isLoadingData = false;
+        isFoundCountry = true;
         update();
       }
     }
-
+    if(!isFoundCountry){
+      for(var countryCode in countriesCodesList!){
+        if("Qatar" == countryCode.name){
+          selectedCountryCode = countryCode;
+          isLoading = false;
+          update();
+        }
+      }
+    }
   }
   choosingAnotherCountryCode(CountryCodeModel chosenCountryCode,BuildContext context){
     selectedCountryCode = chosenCountryCode;
@@ -465,6 +474,10 @@ async {
                 "${data?.info?.otp ?? 0}");
             await Get.find<StorageService>().saveAccountName(
                 data?.info?.name ?? "");
+            await Get.find<StorageService>().saveUserPhoneNumber(
+                " ${phoneController.text ?? ""}");
+            await Get.find<StorageService>().saveUserCountryCode(
+                " ${selectedCountryCode?.code ?? ""}");
             await Get.find<StorageService>().saveCheckerSigningUp(true);
             await Get.find<StorageService>().saveCheckerForgettingPassword(false);
             await Get.to(()=>const OtpScreen(comingFromSignUp: false,comingFromForgetPassword: false,));

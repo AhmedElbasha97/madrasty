@@ -10,6 +10,7 @@ import '../../../Utils/memory.dart';
 import '../../../Utils/translation_key.dart';
 import '../../../Widgets/custom_text_widget.dart';
 import '../../../Widgets/text_field_widget.dart';
+import '../sign_in/sign_in_screen.dart';
 import 'controller/sign_up_controller.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -294,6 +295,41 @@ class SignUpScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          SizedBox(
+                            width: Get.width,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:   [
+                                CustomText(signUpText1.tr,
+                                  textAlign: TextAlign.center,
+                                  style:  TextStyle(
+                                      fontFamily: Get.find<StorageService>().activeLocale == SupportedLocales.english?fontFamilyEnglishName:fontFamilyArabicName,
+                                      color: kDarkBlueColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15),),
+                                const SizedBox(width: 5,),
+                                InkWell(
+                                  onTap: (){
+                                    Get.off(()=>const SignInScreen(),transition: Get.find<StorageService>().activeLocale == SupportedLocales.english?Transition.rightToLeftWithFade:Transition.leftToRightWithFade);
+
+                                  },
+                                  child:  CustomText(signUpText2.tr,
+                                    textAlign: TextAlign.center,
+                                    style:  TextStyle(
+                                        fontFamily: Get.find<StorageService>().activeLocale == SupportedLocales.english?fontFamilyEnglishName:fontFamilyArabicName,
+                                        color: kBlueColor,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 15),),
+                                ),
+
+
+
+                              ],
                             ),
                           ),
                         ],

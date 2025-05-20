@@ -100,12 +100,22 @@ String chosenUserType = chooseUserKey.tr;
     List<Placemark> i =
     await placemarkFromCoordinates(lat, long);
     Placemark placeMark = i.first;
-
+    bool isFoundCountry = false;
     for(var countryCode in countriesCodesList!){
       if(placeMark.country == countryCode.name){
         selectedCountryCode = countryCode;
         isLoadingData = false;
+        isFoundCountry = true;
         update();
+      }
+    }
+    if(!isFoundCountry){
+      for(var countryCode in countriesCodesList!){
+        if("Qatar" == countryCode.name){
+          selectedCountryCode = countryCode;
+          isLoading = false;
+          update();
+        }
       }
     }
 
@@ -379,6 +389,10 @@ String chosenUserType = chooseUserKey.tr;
         await Get.find<StorageService>().saveAccountId("${data?.info?.id??0}");
         await Get.find<StorageService>().saveAccountOtp("${data?.info?.otp??0}");
         await Get.find<StorageService>().saveAccountName(data?.info?.name??"");
+        await Get.find<StorageService>().saveUserPhoneNumber(
+            " ${phoneController.text ?? ""}");
+        await Get.find<StorageService>().saveUserCountryCode(
+            " ${selectedCountryCode?.code ?? ""}");
         await Get.find<StorageService>().saveCheckerSigningUp(false);
         await Get.find<StorageService>().saveCheckerForgettingPassword(false);
         await Get.to(()=>const OtpScreen(comingFromSignUp: false,comingFromForgetPassword: false,));

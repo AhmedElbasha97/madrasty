@@ -3,7 +3,6 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:file_icon/file_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
@@ -44,6 +43,7 @@ import '../../../../Utils/services.dart';
 import '../../../../Utils/translation_key.dart';
 import '../../../../Widgets/alert_dialogue.dart';
 import '../../../../Widgets/custom_text_widget.dart';
+import '../../../../Widgets/file_icons_widget.dart';
 import '../../../../Widgets/loader.dart';
 import '../../../../Widgets/loading_alert_dialogue.dart';
 import '../../../pdfViewer/pdf_viewer.dart';
@@ -1268,7 +1268,7 @@ class _PostScreenChatState extends State<PostScreenChat> {
                                           ],
                                         ),
                                         const SizedBox(width: 10,),
-                                        FileIcon("${Services.baseUrl}${postData?.images?[0]??""}", size: 50),
+                                  FileIconWidget(fileName: getFileName(postData?.images?[0]??"")??""),
 
 
                                       ],

@@ -7,7 +7,6 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:file_icon/file_icon.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +24,7 @@ import '../../../../Utils/localization_services.dart';
 import '../../../../Utils/memory.dart';
 import '../../../../Utils/services.dart';
 import '../../../../Widgets/custom_text_widget.dart';
+import '../../../../Widgets/file_icons_widget.dart';
 import '../../../../Widgets/loader.dart';
 import '../../../../Widgets/yes_or_no_alert_dialogue.dart';
 import '../../../pdfViewer/pdf_viewer.dart';
@@ -371,7 +371,8 @@ class _PdfChattingCellState extends State<PdfChattingCell> {
                                 ],
                               ),
                             ),
-                          ): Container(
+                          ):
+                          Container(
                             width: Get.width*0.6,
                             height: Get.height*0.13,
                             decoration: BoxDecoration(
@@ -407,7 +408,7 @@ class _PdfChattingCellState extends State<PdfChattingCell> {
                                         ],
                                       ),
                                       const SizedBox(width: 10,),
-                                      FileIcon(widget.message?.file??"", size: 50),
+                                      FileIconWidget(fileName:getFileName(widget.message?.file??""),)
 
 
                                     ],

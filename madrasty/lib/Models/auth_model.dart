@@ -33,12 +33,12 @@ class AuthModel {
 }
 
 class Info {
-  int? id;
+  String? id;
   String? name;
   String? phone;
   String? school;
   String? type;
-  int? otp;
+  String? otp;
 
   Info({
     this.id,
@@ -50,12 +50,12 @@ class Info {
   });
 
   factory Info.fromJson(Map<String, dynamic> json) => Info(
-    id: json["id"],
+    id: "${json["id"]}",
     name: json["name"],
     phone: json["phone"],
     school: json["school"],
     type: json["type"],
-    otp: json["otp"],
+    otp: "${json["otp"]}",
   );
 
   Map<String, dynamic> toJson() => {

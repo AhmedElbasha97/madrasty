@@ -16,7 +16,8 @@ abstract class StorageKeys {
   static const String completeHisData = "Complete_His_Data";
   static const String notificationCount = "Notification_Count";
   static const String schoolId = "School_Id";
-
+  static const String userPhoneNumber = "User_Phone_Number";
+  static const String userCountryCode = "User_Country_Code";
 }
 
 class StorageService extends GetxService {
@@ -43,7 +44,10 @@ class StorageService extends GetxService {
       _prefs.setString(StorageKeys.username, userName);
   Future<void> saveNotificationCounter(int counter) async =>
       _prefs.setInt(StorageKeys.notificationCount, counter);
-
+  Future<void> saveUserPhoneNumber(String userPhoneNumber) async =>
+      _prefs.setString(StorageKeys.userPhoneNumber, userPhoneNumber);
+  Future<void> saveUserCountryCode(String userCountryCode) async =>
+      _prefs.setString(StorageKeys.userCountryCode, userCountryCode);
   Future<void> saveCheckerSigningUp(bool checker) async =>
       _prefs.setBool(StorageKeys.signingUp, checker);
   Future<void> saveCheckerForgettingPassword(bool checker) async =>
@@ -79,9 +83,17 @@ class StorageService extends GetxService {
   bool get getCheckerCompletingUserData {
     return _prefs.getBool(StorageKeys.completeHisData)??true;
   }
+  String get getUserPhoneNumber {
+    return _prefs.getString(StorageKeys.userPhoneNumber)?? "0";
+  }
+  String get getUserCountryCode {
+    return _prefs.getString(StorageKeys.userCountryCode) ?? "0";
+  }
   removeOtpCode(){
     _prefs.remove(StorageKeys.userOtp);
     _prefs.remove(StorageKeys.signingUp);
+    _prefs.remove(StorageKeys.userPhoneNumber);
+    _prefs.remove(StorageKeys.userCountryCode);
   }
   removeCompletingUserData(){
     _prefs.remove(StorageKeys.completeHisData);

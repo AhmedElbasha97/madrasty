@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:file_icon/file_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +9,7 @@ import '../../../../Utils/constant.dart';
 import '../../../../Utils/localization_services.dart';
 import '../../../../Utils/memory.dart';
 import '../../../../Widgets/custom_text_widget.dart';
+import '../../../../Widgets/file_icons_widget.dart';
 
 class PdfFileSelectorWidget extends StatefulWidget {
   const PdfFileSelectorWidget({super.key, this.file, required this.chooseAnotherFile, required this.deleteFile});
@@ -120,7 +120,7 @@ class _PdfFileSelectorWidgetState extends State<PdfFileSelectorWidget> {
                                 ],
                               ),
                               const SizedBox(width: 10,),
-                              FileIcon(widget.file?.path??"", size: 50),
+                              FileIconWidget(fileName: getFileName(widget.file?.path??"")),
 
 
                             ],

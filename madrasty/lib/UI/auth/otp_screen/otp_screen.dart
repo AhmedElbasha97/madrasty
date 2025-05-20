@@ -83,25 +83,38 @@ class OtpScreen extends StatelessWidget {
                                 ),
                                 SizedBox(height: Get.height*0.04,),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                                  child: CustomText(
-                                    "تم إرسال رمز التحقق لرقم الجوال الذى تم تسجيل سابقا",
-                                    style: TextStyle(
-                                        fontFamily:
-                                        Get.find<StorageService>().activeLocale ==
-                                            SupportedLocales.english
-                                            ? fontFamilyEnglishName
-                                            : fontFamilyArabicName,
-                                        color: kGrayColor,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 15),
-                                    textAlign: TextAlign.center,
+                                  padding: const EdgeInsets.fromLTRB(18.0,10,25,0),
+                                  child:    Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      CustomText(
+                                        Get.find<StorageService>().activeLocale == SupportedLocales.english?"Enter the verification code \n you received on WhatsApp":" أدخل كود التحقق الذي  \nوصلك على الواتس اب على رقم ",
+                                        textAlign: TextAlign.center,
+                                        style:  TextStyle(
+                                          fontFamily: Get.find<StorageService>().activeLocale == SupportedLocales.english?fontFamilyEnglishName:fontFamilyArabicName,
+                                          color: kDarkBlueColor,
+                                          fontSize: 18,
+                                          letterSpacing: 0,
+
+                                        ),
+                                      ),
+                                      CustomText(
+                                        "${ Get.find<StorageService>().getUserPhoneNumber} (${ Get.find<StorageService>().getUserCountryCode}+) ",
+                                        style:  TextStyle(
+                                          fontFamily: Get.find<StorageService>().activeLocale == SupportedLocales.english?fontFamilyEnglishName:fontFamilyArabicName,
+                                          color: kBlueColor,
+                                          fontSize: 18,
+                                          letterSpacing: 0,
+
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                SizedBox(height: Get.height*0.04,),
+                                SizedBox(height: Get.height*0.02,),
                                 SizedBox(
                                   width: Get.width*0.7,
-                                  height: Get.height * 0.15,
+                                  height: Get.height * 0.1,
                                   child: TextFormField(
 
                                     focusNode: controller.text1FocusNode,
@@ -173,7 +186,74 @@ class OtpScreen extends StatelessWidget {
 
                                   ),
                                 ),
+                                Center(
+                                  child: Obx(() {
+                                    return Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            CustomText(
+                                              Get.find<StorageService>().activeLocale == SupportedLocales.english?"Resend code in:":"إعادة إرسال الرمز في:",
+                                              style:  TextStyle(
+                                                fontFamily: Get.find<StorageService>().activeLocale == SupportedLocales.english?fontFamilyEnglishName:fontFamilyArabicName,
+                                                color: kDarkBlueColor,
+                                                fontSize: 18,
+                                                letterSpacing: 0,
 
+                                              ),
+                                            ),  CustomText(
+                                              Get.find<StorageService>().activeLocale == SupportedLocales.english?" ${controller.remainingSeconds.value}s":"${controller.remainingSeconds.value}ثانية",
+                                              style:  TextStyle(
+                                                fontFamily: Get.find<StorageService>().activeLocale == SupportedLocales.english?fontFamilyEnglishName:fontFamilyArabicName,
+                                                color: kBlueColor,
+                                                fontSize: 18,
+                                                letterSpacing: 0,
+
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 5),
+                                        InkWell(
+                                          onTap: (){
+                                            if(controller.remainingSeconds.value == 0){
+                                              controller.resendingCode( context);
+                                            }
+                                          },
+                                          child: Center(
+                                            child: RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  WidgetSpan(
+                                                    child: Icon(Icons.restart_alt, size: 20,color:  controller.remainingSeconds.value == 0?kBlueColor:kBlackColor,
+                                                    ),
+                                                  ),
+
+                                                  TextSpan(
+                                                    text:Get.find<StorageService>().activeLocale == SupportedLocales.english?"Resend code":"إعادة إرسال الرمز",
+                                                    style:  TextStyle(
+                                                      fontWeight: FontWeight.w800,
+                                                      fontFamily: Get.find<StorageService>().activeLocale == SupportedLocales.english?fontFamilyEnglishName:fontFamilyArabicName,
+                                                      color:  controller.remainingSeconds.value == 0?kBlueColor:kBlackColor,
+                                                      fontSize: 18,
+                                                      letterSpacing: 0,
+
+                                                    ),
+                                                  ),
+
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                      ],
+                                    );
+                                  }),
+                                ),
+                                SizedBox(height: Get.height*0.02,),
                                 InkWell(
                                   onTap: (){
                                     controller.getBackToAnotherScreen( context);
