@@ -79,6 +79,7 @@ class SignUpController extends GetxController {
   bool lastNameState = false;
   bool phoneState = true;
   bool signingUp = false;
+  bool isFoundCountry = false;
 
   @override
   void onInit() {
@@ -235,7 +236,6 @@ class SignUpController extends GetxController {
     List<Placemark> i =
     await placemarkFromCoordinates(lat, long);
     Placemark placeMark = i.first;
-    bool isFoundCountry = false;
     for(var countryCode in countriesCodesList!){
       if(placeMark.country == countryCode.name){
         selectedCountryCode = countryCode;
@@ -244,18 +244,11 @@ class SignUpController extends GetxController {
         update();
       }
     }
-    if(!isFoundCountry){
-      for(var countryCode in countriesCodesList!){
-        if("Qatar" == countryCode.name){
-          selectedCountryCode = countryCode;
-          isLoading = false;
-          update();
-        }
-      }
-    }
+
   }
   choosingAnotherCountryCode(CountryCodeModel chosenCountryCode,BuildContext context){
     selectedCountryCode = chosenCountryCode;
+    isFoundCountry = true;
     update();
     Navigator.pop(context);
   }
@@ -461,7 +454,7 @@ async {
 
     isLoading = true;
     update();
-      if(phoneState&&(val == 1)&&chosenUserType != chooseUserKey.tr){
+      if(phoneState&&(val == 1)&&chosenUserType != chooseUserKey.tr&&selectedCountryCode!=null){
 
         AuthModel? data = await AuthServices.signingUp(chosenUserType, "${selectedCountryCode?.code ?? ""}${phoneController.text}");
         if(data?.status == "true"){
@@ -508,7 +501,8 @@ async {
           }
           );
         }
-        }else{
+        }
+      else{
         isLoading = false;
         update();
         if(val == 0){
@@ -528,6 +522,14 @@ async {
           showDialog(context: context,
               builder: (context) {
                 return AlertDialogue(alertTitle: errorKey.tr, alertText:signInAlert.tr,alertIcon: "assets/icons/warningIcon.png",containerHeight:  Get.height*0.4);
+              });
+        }
+        if(selectedCountryCode == null){
+          showDialog(context: context,
+              builder: (context) {
+                return AlertDialogue(alertTitle: errorKey.tr, alertText:Get.find<StorageService>().activeLocale ==
+                    SupportedLocales.english
+                    ?"You must select a country code.":"يجب عليك أختيار مفتاح رقم الدولة",alertIcon: "assets/icons/warningIcon.png",containerHeight:  Get.height*0.4);
               });
         }
       }

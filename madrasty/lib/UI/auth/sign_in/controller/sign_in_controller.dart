@@ -39,6 +39,7 @@ String chosenUserType = chooseUserKey.tr;
   bool remembering = false;
   RxBool _visiblePsd = false.obs;
   RxBool _isEnableLogin = false.obs;
+  bool isFoundCountry = false;
 
   bool get isEnableLogin => _isEnableLogin.value;
 
@@ -84,6 +85,7 @@ String chosenUserType = chooseUserKey.tr;
     passwordController.dispose();
     super.onClose();
   }
+
   getCountriesCodes() async {
     countriesCodesList = await AppInfoServices.getSchoolsList();
     _getCurrentLocation();
@@ -100,7 +102,6 @@ String chosenUserType = chooseUserKey.tr;
     List<Placemark> i =
     await placemarkFromCoordinates(lat, long);
     Placemark placeMark = i.first;
-    bool isFoundCountry = false;
     for(var countryCode in countriesCodesList!){
       if(placeMark.country == countryCode.name){
         selectedCountryCode = countryCode;
@@ -109,19 +110,13 @@ String chosenUserType = chooseUserKey.tr;
         update();
       }
     }
-    if(!isFoundCountry){
-      for(var countryCode in countriesCodesList!){
-        if("Qatar" == countryCode.name){
-          selectedCountryCode = countryCode;
-          isLoading = false;
-          update();
-        }
-      }
-    }
+
+
 
   }
   choosingAnotherCountryCode(CountryCodeModel chosenCountryCode,BuildContext context){
     selectedCountryCode = chosenCountryCode;
+    isFoundCountry = true;
     update();
     Navigator.pop(context);
   }
@@ -380,7 +375,7 @@ String chosenUserType = chooseUserKey.tr;
     signingIn = true;
     update();
 
-    if(phoneState&&passState&&chosenUserType !=( chooseUserKey.tr)){
+    if(phoneState&&passState&&chosenUserType !=( chooseUserKey.tr)&&selectedCountryCode!=null){
 
       AuthModel? data = await AuthServices.loggingIn(
           "${selectedCountryCode?.code ?? ""}${phoneController.text}", passwordController.text,chosenUserType);
@@ -412,6 +407,14 @@ String chosenUserType = chooseUserKey.tr;
         showDialog(context: context,
             builder: (context) {
               return AlertDialogue(alertTitle: errorKey.tr, alertText:signInAlert.tr,alertIcon: "assets/icons/warningIcon.png",containerHeight:  Get.height*0.4);
+            });
+      }
+      if(selectedCountryCode == null){
+        showDialog(context: context,
+            builder: (context) {
+              return AlertDialogue(alertTitle: errorKey.tr, alertText:Get.find<StorageService>().activeLocale ==
+                  SupportedLocales.english
+                  ?"You must select a country code.":"يجب عليك أختيار مفتاح رقم الدولة",alertIcon: "assets/icons/warningIcon.png",containerHeight:  Get.height*0.4);
             });
       }
     }

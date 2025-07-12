@@ -264,7 +264,7 @@ class DetectPhoneNumberScreen extends StatelessWidget {
                                                                 Radius.circular(
                                                                     15))),
                                                         child:const CircularProgressIndicator(
-                                                          color: kYellowColor,
+                                                          color: kBlueColor,
                                                         )),
                                                   );
                                                 },
@@ -290,7 +290,7 @@ class DetectPhoneNumberScreen extends StatelessWidget {
                                                 width: 5,
                                               ),
                                               CustomText(
-                                                "   ${controller.selectedCountryCode?.code??signUpTextPhoneKey.tr}    ",
+                                                "   ${controller.selectedCountryCode?.code??"wait"}    ",
                                                 style: TextStyle(
                                                   fontSize: 15.0,
                                                   fontFamily: Get.find<
@@ -305,7 +305,7 @@ class DetectPhoneNumberScreen extends StatelessWidget {
                                               ),
                                               const Icon(
                                                   Icons.check_rounded,
-                                                  color: kBlueColor),
+                                                  color: kSuccessColor),
                                               const SizedBox(
                                                 width: 5,
                                               ),
@@ -316,7 +316,7 @@ class DetectPhoneNumberScreen extends StatelessWidget {
                                           onTap: (){
                                             controller. choosingCountryCode( context);
                                           },
-                                          child: Row(
+                                          child: (controller.isFoundCountry)?Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               CachedNetworkImage(
@@ -347,7 +347,7 @@ class DetectPhoneNumberScreen extends StatelessWidget {
                                                                 Radius.circular(
                                                                     15))),
                                                         child:const CircularProgressIndicator(
-                                                          color: kYellowColor,
+                                                          color: kBlueColor,
                                                         )),
                                                   );
                                                 },
@@ -374,7 +374,7 @@ class DetectPhoneNumberScreen extends StatelessWidget {
                                               ),
 
                                               CustomText(
-                                                "   ${controller.selectedCountryCode?.code??signUpTextPhoneKey.tr}    ",
+                                                "   ${controller.selectedCountryCode?.code??"wait"}    ",
                                                 style: TextStyle(
                                                   fontSize: 15.0,
                                                   fontFamily: Get.find<
@@ -395,13 +395,40 @@ class DetectPhoneNumberScreen extends StatelessWidget {
                                                 width: 5,
                                               ),
                                             ],
+                                          ):Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              const Icon(Icons.warning_amber,color: kDarkBlueColor,),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+
+                                              CustomText(
+                                                "choose",
+                                                style: TextStyle(
+                                                  fontSize: 15.0,
+                                                  fontFamily: Get.find<
+                                                      StorageService>()
+                                                      .activeLocale ==
+                                                      SupportedLocales
+                                                          .english
+                                                      ? fontFamilyEnglishName
+                                                      : fontFamilyArabicName,
+                                                  color: kBlueColor,
+                                                ),
+                                              ),
+
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                            ],
                                           ),
                                         )
                                             :  InkWell(
                                           onTap: (){
                                             controller. choosingCountryCode( context);
                                           },
-                                          child: Row(
+                                          child:(controller.isFoundCountry)? Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               CachedNetworkImage(
@@ -432,7 +459,7 @@ class DetectPhoneNumberScreen extends StatelessWidget {
                                                                 Radius.circular(
                                                                     15))),
                                                         child:const CircularProgressIndicator(
-                                                          color: kYellowColor,
+                                                          color: kBlueColor,
                                                         )),
                                                   );
                                                 },
@@ -458,7 +485,7 @@ class DetectPhoneNumberScreen extends StatelessWidget {
                                                 width: 5,
                                               ),
                                               CustomText(
-                                                "   ${controller.selectedCountryCode?.code??signUpTextPhoneKey.tr}    ",
+                                                "   ${controller.selectedCountryCode?.code??"wait"}    ",
                                                 style: TextStyle(
                                                   fontSize: 15.0,
                                                   fontFamily: Get.find<
@@ -470,6 +497,33 @@ class DetectPhoneNumberScreen extends StatelessWidget {
                                                       : fontFamilyArabicName,
                                                   color: kBlueColor,
                                                 ),
+                                              ),
+                                            ],
+                                          ):Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              const Icon(Icons.warning_amber,color: kDarkBlueColor,),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+
+                                              CustomText(
+                                                "choose",
+                                                style: TextStyle(
+                                                  fontSize: 15.0,
+                                                  fontFamily: Get.find<
+                                                      StorageService>()
+                                                      .activeLocale ==
+                                                      SupportedLocales
+                                                          .english
+                                                      ? fontFamilyEnglishName
+                                                      : fontFamilyArabicName,
+                                                  color: kBlueColor,
+                                                ),
+                                              ),
+
+                                              const SizedBox(
+                                                width: 5,
                                               ),
                                             ],
                                           ),
