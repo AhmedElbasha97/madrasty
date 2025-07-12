@@ -839,7 +839,7 @@ receivingKidFromSchool(double pLng,double pLat,BuildContext context,String kidId
       pageNumber++;
       isLoadingMoreDataForPosts= true;
       update();
-      postData = await PostingServices.getPostsList("${schoolId?.id??0}", "${schoolId?.schoolIdModelClass??0}", "$pageNumber","${chosenPostType?.id??0}");
+      postData = await PostingServices.getPostsList("${schoolId?.school??0}", "${schoolId?.schoolIdModelClass??0}", "$pageNumber","${chosenPostType?.id??0}");
       for(Post post in postData!.posts!){
         postsListData?.add(post);
       }

@@ -124,9 +124,12 @@ class StudentProfileController extends GetxController{
 
   }
   getSchoolId() async {
+
     userData = await PostingServices.getPersonInfoData();
     await Get.find<StorageService>().saveSchoolId("${userData?.school??0}");
     schoolId = await SchoolServices.getSchoolsId("${userData?.school??0}");
+    print("${userData?.school??0}");
+    print("${schoolId?.school??0}");
   }
   //class tables------------------------------------------------------------------------------
   initiateClassTable(){
@@ -593,22 +596,27 @@ update();
   }
   getPostData() async {
     postIsLoading = true;
-
     pageNumber = 1;
     update();
+    print("${userData?.school??0}");
+    print("${schoolId?.school??0}");
     peopleShareList = await PostingServices.getStudentShareList("${schoolId?.school??0}", "${schoolId?.schoolIdModelClass??0}");
     postData = await PostingServices.getPostsList("${schoolId?.school??0}", "${schoolId?.schoolIdModelClass??0}", "$pageNumber","${chosenPostType?.id??0}");
     postsListData = postData?.posts;
+
     postIsLoading = false;
     update();
   }
   getMoreData() async {
+    print("school 1${userData?.school??0}");
+    print("${schoolId?.school??0}");
     if(postData!.totalPages! > pageNumber ) {
       pageNumber++;
       isLoadingMoreDataForPosts= true;
       update();
-      postData = await PostingServices.getPostsList("${schoolId?.id??0}", "${schoolId?.schoolIdModelClass??0}", "$pageNumber","${chosenPostType?.id??0}");
+      postData = await PostingServices.getPostsList("${schoolId?.school??0}", "${schoolId?.schoolIdModelClass??0}", "$pageNumber","${chosenPostType?.id??0}");
       for(Post post in postData!.posts!){
+        print("${post.id}");
         postsListData?.add(post);
       }
       isLoadingMoreDataForPosts = false;

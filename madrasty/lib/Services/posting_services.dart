@@ -24,6 +24,13 @@ class PostingServices {
   static ApiService api = ApiService();
 
   static Future<PostModel?>getPostsList(String schoolId,String classId,String page,String teacherId,) async {
+    print("school_id${schoolId}class_id${classId}teacher_id${Get
+        .find<StorageService>()
+        .getId}"=="TEACHER"?Get
+        .find<StorageService>()
+        .getId:"${teacherId}user_type${Get
+        .find<StorageService>()
+        .getUserType}page${page}",);
     var data = await api.request(Services.getPostsEndPoint, "POST",queryParamters: {
       "school_id":schoolId,
       "class_id":classId,

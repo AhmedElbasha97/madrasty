@@ -30,331 +30,333 @@ class ParentPostScreenWidget extends StatelessWidget {
       builder: (PerentProfileController controller) => Platform.isIOS
           ? Stack(
         children: [
-          CustomScrollView(
-            slivers: [
-              CupertinoSliverRefreshControl(onRefresh: () async {
-                await controller.getPostData();}),
-              SliverToBoxAdapter(child: SizedBox(
-                height: Get.height*0.6,
-                child: SingleChildScrollView(
-                  controller: controller.scrollController,
+          RefreshIndicator(
+            onRefresh: () async {
+              await controller.getPostData();},
+            child: SizedBox(
+              height: Get.height*0.6,
+              child: SingleChildScrollView(
+                controller: controller.scrollController,
 
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                              onTap: (){
-                                Get.to(()=> AddPostScreen(schoolId: "${controller.schoolId?.school??0}",classId: "${controller.schoolId?.schoolIdModelClass??0}",));
-                              },
-                              child: Container(
-                                width: Get.width*0.65,
-                                height: Get.height*0.07,
-                                decoration: BoxDecoration(
-                                    border: Border.all( color:kLightBlueColor,width: 2),
-                                    borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.1),
-                                        offset: const Offset(
-                                          0.0,
-                                          0.0,
-                                        ),
-                                        blurRadius: 13.0,
-                                        spreadRadius: 2.0,
-                                      ), //BoxShadow
-                                      BoxShadow(
-                                        color: Colors.white.withOpacity(0.2),
-                                        offset: const Offset(0.0, 0.0),
-                                        blurRadius: 0.0,
-                                        spreadRadius: 0.0,
-                                      ), //BoxShadow
-                                    ],
-                                    color: kDarkBlueColor
-                                ),
-                                child:  Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CustomText( Get.find<StorageService>().activeLocale ==
-                                        SupportedLocales.english
-                                        ? "add post"
-                                        : "اضف منشور ",style:  TextStyle(
-                                        fontFamily:  Get.find<StorageService>().activeLocale ==
-                                            SupportedLocales.english
-                                            ? fontFamilyEnglishName
-                                            : fontFamilyArabicName,
-                                        color: kWhiteColor,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 15),
-                                    ),
-                                    const Icon(
-                                      Icons.add,
-                                      weight: 30,
-                                      color: kLightBlueColor,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 10,),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                              onTap: (){
-                                controller.showFilteringScreen(context);
-                              },
-                              child: Container(
-                                width: Get.width*0.19,
-                                height: Get.height*0.07,
-                                decoration: BoxDecoration(
-                                    border: Border.all( color:kLightBlueColor,width: 2),
-                                    borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.1),
-                                        offset: const Offset(
-                                          0.0,
-                                          0.0,
-                                        ),
-                                        blurRadius: 13.0,
-                                        spreadRadius: 2.0,
-                                      ), //BoxShadow
-                                      BoxShadow(
-                                        color: Colors.white.withOpacity(0.2),
-                                        offset: const Offset(0.0, 0.0),
-                                        blurRadius: 0.0,
-                                        spreadRadius: 0.0,
-                                      ), //BoxShadow
-                                    ],
-                                    color: kDarkBlueColor
-                                ),
-                                child:  const Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.filter_alt_outlined,
-                                      weight: 30,
-                                      color: kLightBlueColor,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                      const SizedBox(height: 5,),
-                      controller.isLoadingPostsTypes?Column(
-                        children: [
-                          const SizedBox(height: 10,),
-                          Container(
-                            height: Get.height * 0.07,
-                            width: Get.width * 0.8,
-                            decoration:  BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-
-                                color: const Color(0xFFDFDDDF)
-
-                            ),
-                            child: Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Container(
-                                  height: Get.height * 0.07,
-                                  width: Get.width * 0.75,
-                                  decoration:   BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-
-                                    color:  const Color(0xFFDFDDDF),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: kGrayColor,
-                                        blurRadius: 2,
-                                        offset:
-                                        Offset(1, 1), // Shadow position
-                                      ),
-                                    ],
-
-                                  ),
-                                ),
-                              ),
-                            ).animate(onPlay: (controller) => controller.repeat())
-                                .shimmer(duration: 1200.ms, color:  kBlueColor.withAlpha(55))
-                                .animate() // this wraps the previous Animate in another Animate
-                                .fadeIn(duration: 700.ms, curve: Curves.easeOutQuad)
-                                .slide(),
-                          ),
-                        ],
-                      ).animate(onPlay: (controller) => controller.repeat())
-                          .shimmer(duration: 1200.ms, color:  kBlueColor.withAlpha(55))
-                          .animate() // this wraps the previous Animate in another Animate
-                          .fadeIn(duration: 700.ms, curve: Curves.easeOutQuad)
-                          .slide():
-                      PopupMenuButton<StudentShareModel>(
-                        constraints: BoxConstraints(
-                          maxWidth: Get.width * 0.8,
-                          minWidth: Get.width * 0.8,
-                        ),
-                        itemBuilder: (context) =>
-                            controller.listPostTypes!.map((e) {
-                              return PopupMenuItem(
-                                value: e,
-                                textStyle: TextStyle(
-                                    color: kDarkBlueColor,
-                                    fontFamily:
-                                    Get.find<StorageService>().activeLocale ==
-                                        SupportedLocales.english
-                                        ? fontFamilyEnglishName
-                                        : fontFamilyArabicName,
-                                    fontWeight: FontWeight.w700),
-                                onTap: () {
-                                  controller. choosingPostType(e);
-                                },
-                                child: SizedBox(
-                                  width: Get.width * 0.8,
-                                  child: Column(
-                                    children: [
-                                      CustomText(
-                                        e.name??"",
-                                        style: TextStyle(
-                                            color: kWhiteColor,
-                                            fontFamily: Get.find<StorageService>()
-                                                .activeLocale ==
-                                                SupportedLocales.english
-                                                ? fontFamilyEnglishName
-                                                : fontFamilyArabicName,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      e == controller.listPostTypes?.last
-                                          ? const SizedBox()
-                                          :  Divider(
-                                        color: kDarkBlueColor.withOpacity(0.5),
-                                        height: 1,
-                                        thickness: 1,
-                                        endIndent: 0,
-                                        indent: 0,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                        color: kDarkBlueColor,
-                        child: Container(
-                          height: Get.height * 0.07,
-                          width: Get.width * 0.8,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            image: const DecorationImage(
-                                image: AssetImage(
-                                    "assets/images/backgroundImage.png"),
-                                fit: BoxFit.cover),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: (){
+                              Get.to(()=> AddPostScreen(schoolId: "${controller.schoolId?.school??0}",classId: "${controller.schoolId?.schoolIdModelClass??0}",));
+                            },
                             child: Container(
-                              constraints: BoxConstraints(
-                                minHeight: Get.height * 0.04,
-                              ),
-                              width: Get.width * 0.8,
+                              width: Get.width*0.65,
+                              height: Get.height*0.07,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: kDarkBlueColor,
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: kGrayColor,
-                                    blurRadius: 2,
-                                    offset: Offset(1, 1), // Shadow position
+                                  border: Border.all( color:kLightBlueColor,width: 2),
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      offset: const Offset(
+                                        0.0,
+                                        0.0,
+                                      ),
+                                      blurRadius: 13.0,
+                                      spreadRadius: 2.0,
+                                    ), //BoxShadow
+                                    BoxShadow(
+                                      color: Colors.white.withOpacity(0.2),
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ), //BoxShadow
+                                  ],
+                                  color: kDarkBlueColor
+                              ),
+                              child:  Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomText( Get.find<StorageService>().activeLocale ==
+                                      SupportedLocales.english
+                                      ? "add post"
+                                      : "اضف منشور ",style:  TextStyle(
+                                      fontFamily:  Get.find<StorageService>().activeLocale ==
+                                          SupportedLocales.english
+                                          ? fontFamilyEnglishName
+                                          : fontFamilyArabicName,
+                                      color: kWhiteColor,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 15),
+                                  ),
+                                  const Icon(
+                                    Icons.add,
+                                    weight: 30,
+                                    color: kLightBlueColor,
                                   ),
                                 ],
                               ),
-                              child: Center(
-                                child: Padding(
-                                  padding:
-                                  const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        width: Get.width * 0.6,
-                                        child: CustomText(
-                                          textAlign: TextAlign.center,
-                                          maxLines: 3,
-                                          controller.chosenPostType?.name??"",
-                                          style: TextStyle(
-                                            shadows: <Shadow>[
-                                              Shadow(
-                                                  offset:
-                                                  const Offset(0.5, 0.5),
-                                                  blurRadius: 0.5,
-                                                  color: Colors.black
-                                                      .withOpacity(0.5)),
-                                            ],
-                                            fontSize: 13,
-                                            letterSpacing: 0,
-                                            fontFamily:
-                                            Get.find<StorageService>()
-                                                .activeLocale ==
-                                                SupportedLocales.english
-                                                ? fontFamilyEnglishName
-                                                : fontFamilyArabicName,
-                                            color: kWhiteColor,
-                                          ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10,),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: (){
+                              controller.showFilteringScreen(context);
+                            },
+                            child: Container(
+                              width: Get.width*0.19,
+                              height: Get.height*0.07,
+                              decoration: BoxDecoration(
+                                  border: Border.all( color:kLightBlueColor,width: 2),
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      offset: const Offset(
+                                        0.0,
+                                        0.0,
+                                      ),
+                                      blurRadius: 13.0,
+                                      spreadRadius: 2.0,
+                                    ), //BoxShadow
+                                    BoxShadow(
+                                      color: Colors.white.withOpacity(0.2),
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ), //BoxShadow
+                                  ],
+                                  color: kDarkBlueColor
+                              ),
+                              child:  const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.filter_alt_outlined,
+                                    weight: 30,
+                                    color: kLightBlueColor,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      ],
+                    ),
+                    const SizedBox(height: 5,),
+                    controller.isLoadingPostsTypes?Column(
+                      children: [
+                        const SizedBox(height: 10,),
+                        Container(
+                          height: Get.height * 0.07,
+                          width: Get.width * 0.8,
+                          decoration:  BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+
+                              color: const Color(0xFFDFDDDF)
+
+                          ),
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                height: Get.height * 0.07,
+                                width: Get.width * 0.75,
+                                decoration:   BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+
+                                  color:  const Color(0xFFDFDDDF),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: kGrayColor,
+                                      blurRadius: 2,
+                                      offset:
+                                      Offset(1, 1), // Shadow position
+                                    ),
+                                  ],
+
+                                ),
+                              ),
+                            ),
+                          ).animate(onPlay: (controller) => controller.repeat())
+                              .shimmer(duration: 1200.ms, color:  kBlueColor.withAlpha(55))
+                              .animate() // this wraps the previous Animate in another Animate
+                              .fadeIn(duration: 700.ms, curve: Curves.easeOutQuad)
+                              .slide(),
+                        ),
+                      ],
+                    ).animate(onPlay: (controller) => controller.repeat())
+                        .shimmer(duration: 1200.ms, color:  kBlueColor.withAlpha(55))
+                        .animate() // this wraps the previous Animate in another Animate
+                        .fadeIn(duration: 700.ms, curve: Curves.easeOutQuad)
+                        .slide():
+                    PopupMenuButton<StudentShareModel>(
+                      constraints: BoxConstraints(
+                        maxWidth: Get.width * 0.8,
+                        minWidth: Get.width * 0.8,
+                      ),
+                      itemBuilder: (context) =>
+                          controller.listPostTypes!.map((e) {
+                            return PopupMenuItem(
+                              value: e,
+                              textStyle: TextStyle(
+                                  color: kDarkBlueColor,
+                                  fontFamily:
+                                  Get.find<StorageService>().activeLocale ==
+                                      SupportedLocales.english
+                                      ? fontFamilyEnglishName
+                                      : fontFamilyArabicName,
+                                  fontWeight: FontWeight.w700),
+                              onTap: () {
+                                controller. choosingPostType(e);
+                              },
+                              child: SizedBox(
+                                width: Get.width * 0.8,
+                                child: Column(
+                                  children: [
+                                    CustomText(
+                                      e.name??"",
+                                      style: TextStyle(
+                                          color: kWhiteColor,
+                                          fontFamily: Get.find<StorageService>()
+                                              .activeLocale ==
+                                              SupportedLocales.english
+                                              ? fontFamilyEnglishName
+                                              : fontFamilyArabicName,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    e == controller.listPostTypes?.last
+                                        ? const SizedBox()
+                                        :  Divider(
+                                      color: kDarkBlueColor.withOpacity(0.5),
+                                      height: 1,
+                                      thickness: 1,
+                                      endIndent: 0,
+                                      indent: 0,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                      color: kDarkBlueColor,
+                      child: Container(
+                        height: Get.height * 0.07,
+                        width: Get.width * 0.8,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          image: const DecorationImage(
+                              image: AssetImage(
+                                  "assets/images/backgroundImage.png"),
+                              fit: BoxFit.cover),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            constraints: BoxConstraints(
+                              minHeight: Get.height * 0.04,
+                            ),
+                            width: Get.width * 0.8,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: kDarkBlueColor,
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: kGrayColor,
+                                  blurRadius: 2,
+                                  offset: Offset(1, 1), // Shadow position
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Padding(
+                                padding:
+                                const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      width: Get.width * 0.6,
+                                      child: CustomText(
+                                        textAlign: TextAlign.center,
+                                        maxLines: 3,
+                                        controller.chosenPostType?.name??"",
+                                        style: TextStyle(
+                                          shadows: <Shadow>[
+                                            Shadow(
+                                                offset:
+                                                const Offset(0.5, 0.5),
+                                                blurRadius: 0.5,
+                                                color: Colors.black
+                                                    .withOpacity(0.5)),
+                                          ],
+                                          fontSize: 13,
+                                          letterSpacing: 0,
+                                          fontFamily:
+                                          Get.find<StorageService>()
+                                              .activeLocale ==
+                                              SupportedLocales.english
+                                              ? fontFamilyEnglishName
+                                              : fontFamilyArabicName,
+                                          color: kWhiteColor,
                                         ),
                                       ),
-                                      const Icon(Icons.arrow_downward_sharp,
-                                          color: kWhiteColor, size: 20),
-                                    ],
-                                  ),
+                                    ),
+                                    const Icon(Icons.arrow_downward_sharp,
+                                        color: kWhiteColor, size: 20),
+                                  ],
                                 ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 5,),
-                      const SizedBox(height: 5,),
+                    ),
+                    const SizedBox(height: 5,),
 
-                      controller.postIsLoading?
-                      const SingleChildScrollView(
-                        child: PostLoadingWidget(),
-                      ):(controller.postsListData?.length??0)==0?controller.chosenPostType.isNull?NoDataWidget(refreshedFunc: (){}, text:
-                      Get.find<StorageService>().activeLocale ==
-                          SupportedLocales.english
-                          ? 'There are no posts available in this category ${controller.chosenPostType?.name??""}'
-                          : 'لا يوجد منشورات متاحه هذا التصنيف ${controller.chosenPostType?.name??""}', imgPath: "assets/images/No data-cuate.png", hasRefreshButtonOrNot: false,):NoDataWidget(refreshedFunc: (){}, text: Get.find<StorageService>().activeLocale ==
-                          SupportedLocales.english
-                          ? 'No posts available'
-                          : 'لا يوجد منشورات متاحه', imgPath: "assets/images/No data-cuate.png", hasRefreshButtonOrNot: false,)
-                          :
-                      Container(
-                          color: Colors.white,
-                          child:
-                          PlatformRefreshIndicator(
-                              onRefresh: () async {
-                                await controller.getPostData();},
-                              count:  controller.postsListData?.length??0,
-                              itemBuilder: (context, index) =>
-                                  Column(
-                                    children: [
-                                      PostWidget(postDataFromScreen:  controller.postsListData?[index], schoolId: "${controller.schoolId?.school??0}", classId:  "${controller.schoolId?.schoolIdModelClass??0}",parentShareList: controller.peopleShareList,),
-                                      controller.isLoadingMoreDataForPosts?const PostLoadingWidget():const SizedBox(),
-                                    ],
-                                  ))                      ),
-                    ],
-                  ),
+                    controller.postIsLoading?
+                    const SingleChildScrollView(
+                      child: PostLoadingWidget(),
+                    ):(controller.postsListData?.length??0)==0?controller.selectedPostType!=""?NoDataWidget(refreshedFunc: (){}, text:
+                    Get.find<StorageService>().activeLocale ==
+                        SupportedLocales.english
+                        ? 'There are no posts available in this category ${controller.chosenPostType?.name??""}'
+                        : 'لا يوجد منشورات متاحه هذا التصنيف ${controller.chosenPostType?.name??""}', imgPath: "assets/images/No data-cuate.png", hasRefreshButtonOrNot: false,):NoDataWidget(refreshedFunc: (){}, text: Get.find<StorageService>().activeLocale ==
+                        SupportedLocales.english
+                        ? 'No posts available'
+                        : 'لا يوجد منشورات متاحه', imgPath: "assets/images/No data-cuate.png", hasRefreshButtonOrNot: false,)
+                        :
+                    Container(
+                        color: Colors.white,
+                        child:
+                        Column(
+                          children: [
+                            ...List.generate(
+                              controller.postsListData?.length??0,
+                                  (index) => PostWidget(
+                                postDataFromScreen: controller.postsListData?[index],
+                                schoolId: "${controller.schoolId?.school ?? 0}",
+                                classId: "${controller.schoolId?.schoolIdModelClass ?? 0}",
+                                parentShareList: controller.peopleShareList,
+                              ),
+                            ),
+                            if (controller.isLoadingMoreDataForPosts)
+                              const PostLoadingWidget(),
+                          ],
+                        )
+                    ),
+                  ],
                 ),
-              )),
-            ],
+              ),
+            ),
           ),
           Positioned(
             bottom: 10,
@@ -406,7 +408,6 @@ class ParentPostScreenWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-
 
 
               ],
