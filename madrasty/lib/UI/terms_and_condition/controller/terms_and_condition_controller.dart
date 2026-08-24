@@ -10,7 +10,6 @@ class TermsAndConditionController extends GetxController{
   bool isOffline = false;
 
   final BuildContext context;
-  @override
   TermsAndConditionController(this.context);
   @override
   Future<void> onInit() async {

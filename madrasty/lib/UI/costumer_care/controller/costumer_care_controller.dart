@@ -3,20 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:madrasty/Services/posting_services.dart';
 import 'package:madrasty/Services/teacher_services.dart';
-import 'package:madrasty/UI/welcome_screen/welcome_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../Models/person_info_model.dart';
-import '../../../Models/response_model.dart';
 import '../../../Models/teacher_info_model.dart';
-import '../../../Services/auth_services.dart';
-import '../../../Services/biomatrics_auth_services.dart';
-import '../../../Utils/localization_services.dart';
 import '../../../Utils/memory.dart';
 import '../../../Utils/translation_key.dart';
 import '../../../Widgets/alert_dialogue.dart';
-import '../../../Widgets/yes_or_no_alert_dialogue.dart';
-import '../../auth/edit_password/edit_password_screen.dart';
 
 class CostumerCareController extends GetxController{
   GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();

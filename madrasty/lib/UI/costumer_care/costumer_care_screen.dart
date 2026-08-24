@@ -5,10 +5,9 @@ import 'package:madrasty/UI/costumer_care/controller/costumer_care_controller.da
 
 import '../../Utils/Colors_File.dart';
 import '../../Utils/memory.dart';
-import '../../Widgets/loading_alert_dialogue.dart';
 
 class CostumerCareScreen extends StatelessWidget {
-  const CostumerCareScreen({Key? key}) : super(key: key);
+  const CostumerCareScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

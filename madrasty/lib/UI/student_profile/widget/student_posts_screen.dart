@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
@@ -15,7 +14,6 @@ import '../../../Utils/localization_services.dart';
 import '../../../Utils/memory.dart';
 import '../../../Widgets/custom_text_widget.dart';
 import '../../../Widgets/no_data_widget.dart';
-import '../../../Widgets/pull_to_refresh_widget.dart';
 import '../../posts/add_post/add_post_screen.dart';
 import '../../posts/widgets/post_widget.dart';
 import '../controller/student_profile_controller.dart';

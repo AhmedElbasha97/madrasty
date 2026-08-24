@@ -1,5 +1,5 @@
 
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, avoid_print
 
 import 'dart:io';
 
@@ -30,7 +30,7 @@ class PostingServices {
         .find<StorageService>()
         .getId:"${teacherId}user_type${Get
         .find<StorageService>()
-        .getUserType}page${page}",);
+        .getUserType}page$page",);
     var data = await api.request(Services.getPostsEndPoint, "POST",queryParamters: {
       "school_id":schoolId,
       "class_id":classId,

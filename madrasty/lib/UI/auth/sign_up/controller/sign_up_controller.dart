@@ -468,7 +468,7 @@ async {
             await Get.find<StorageService>().saveAccountName(
                 data?.info?.name ?? "");
             await Get.find<StorageService>().saveUserPhoneNumber(
-                " ${phoneController.text ?? ""}");
+                " ${phoneController.text}");
             await Get.find<StorageService>().saveUserCountryCode(
                 " ${selectedCountryCode?.code ?? ""}");
             await Get.find<StorageService>().saveCheckerSigningUp(true);

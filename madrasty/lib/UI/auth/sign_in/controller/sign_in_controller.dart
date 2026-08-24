@@ -385,7 +385,7 @@ String chosenUserType = chooseUserKey.tr;
         await Get.find<StorageService>().saveAccountOtp("${data?.info?.otp??0}");
         await Get.find<StorageService>().saveAccountName(data?.info?.name??"");
         await Get.find<StorageService>().saveUserPhoneNumber(
-            " ${phoneController.text ?? ""}");
+            " ${phoneController.text}");
         await Get.find<StorageService>().saveUserCountryCode(
             " ${selectedCountryCode?.code ?? ""}");
         await Get.find<StorageService>().saveCheckerSigningUp(false);

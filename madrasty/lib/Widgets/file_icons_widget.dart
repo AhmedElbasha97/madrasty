@@ -4,7 +4,7 @@ import 'package:path/path.dart' as p;
 class FileIconWidget extends StatelessWidget {
   final String fileName;
 
-  const FileIconWidget({Key? key, required this.fileName}) : super(key: key);
+  const FileIconWidget({super.key, required this.fileName});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,6 @@ class FileIconWidget extends StatelessWidget {
 
   Widget _getFileIcon(String fileName) {
     final ext = p.extension(fileName).toLowerCase().replaceAll('.', '');
-print(ext);
     final iconMap = {
       'pdf': 'PDF.png',
       'doc': 'DOC.png',

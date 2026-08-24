@@ -9,7 +9,7 @@ class ConnectionService extends GetxService {
 
   final _connectivity = Connectivity();
   final RxBool hasConnection = false.obs;
-  late StreamSubscription<ConnectivityResult> _subscription;
+  late StreamSubscription<List<ConnectivityResult>> _subscription;
 
   static Future<ConnectionService> init() async {
     final ConnectionService service = ConnectionService();
@@ -21,8 +21,7 @@ class ConnectionService extends GetxService {
     return service;
   }
 
-  void _onConnectionChange(ConnectivityResult resul) {
-
+  void _onConnectionChange(List<ConnectivityResult> results) {
     _checkConnection();
   }
 

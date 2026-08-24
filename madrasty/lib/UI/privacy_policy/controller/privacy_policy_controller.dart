@@ -9,7 +9,6 @@ class PrivacyPolicyController extends GetxController {
   bool loading = true;
   bool isOffline = false;
   final BuildContext context;
-  @override
   PrivacyPolicyController(this.context);
   @override
   Future<void> onInit() async {
